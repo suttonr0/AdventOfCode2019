@@ -11,7 +11,32 @@ import java.util.List;
 
 public class Day1 {
 
-    public static List<Integer> getIntegerLinesFromFile(String fileName){
+    public static int getSumOfFuelRequirements (List<LaunchModule> launchModules){
+        int sum = 0;
+        for (LaunchModule launchModule : launchModules){
+            sum += launchModule.calculateFuelRequirement();
+        }
+        return sum;
+    }
+
+    /**
+     * Reads a list of mass integer values from a file and creates corresponding LaunchModules
+     */
+    public static List<LaunchModule> getLaunchModulesFromFile(String fileName){
+        List<LaunchModule> launchModules = new ArrayList<>();
+        List<Integer> masses = getIntegerLinesFromFile(fileName);
+        if(masses != null) {
+            for (Integer mass : masses) {
+                LaunchModule launchModule = new LaunchModule(mass);
+                launchModules.add(launchModule);
+            }
+            return launchModules;
+        }
+        else
+            return null;
+    }
+
+    private static List<Integer> getIntegerLinesFromFile(String fileName){
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             return getIntegerLinesFromBufferedReader(br);
         } catch (FileNotFoundException e){
