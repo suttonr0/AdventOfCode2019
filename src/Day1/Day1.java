@@ -11,7 +11,14 @@ import java.util.List;
 
 public class Day1 {
 
-    public static int getSumOfFuelRequirements (List<LaunchModule> launchModules){
+    public static void runDay1(){
+        System.out.println("Calculating sum of fuel requirements:");
+        List<LaunchModule> launchModules = Day1.getLaunchModulesFromFile("src/Day1/module_masses.txt");
+        int fuelRequirement = Day1.getSumOfFuelRequirements(launchModules);
+        System.out.println(fuelRequirement);
+    }
+
+    private static int getSumOfFuelRequirements (List<LaunchModule> launchModules){
         int sum = 0;
         for (LaunchModule launchModule : launchModules){
             sum += launchModule.calculateFuelRequirement();
@@ -22,7 +29,7 @@ public class Day1 {
     /**
      * Reads a list of mass integer values from a file and creates corresponding LaunchModules
      */
-    public static List<LaunchModule> getLaunchModulesFromFile(String fileName){
+    private static List<LaunchModule> getLaunchModulesFromFile(String fileName){
         List<LaunchModule> launchModules = new ArrayList<>();
         List<Integer> masses = getIntegerLinesFromFile(fileName);
         if(masses != null) {
