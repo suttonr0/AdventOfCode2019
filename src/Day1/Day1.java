@@ -1,7 +1,5 @@
 package Day1;
 
-import Day1.LaunchModule;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -12,10 +10,11 @@ import java.util.List;
 public class Day1 {
 
     public static void runDay1(){
-        System.out.println("Calculating sum of fuel requirements:");
         List<LaunchModule> launchModules = Day1.getLaunchModulesFromFile("src/Day1/module_masses.txt");
-        int fuelRequirement = Day1.getSumOfFuelRequirements(launchModules);
-        System.out.println(fuelRequirement);
+        System.out.println("Calculating sum of fuel requirements:");
+        System.out.println(Day1.getSumOfFuelRequirements(launchModules));
+        System.out.println("Calculating sum of fuel requirements accounting fuel mass:");
+        System.out.println(Day1.getSumOfFuelRequirementsConsideringFuelMass(launchModules));
     }
 
     private static int getSumOfFuelRequirements (List<LaunchModule> launchModules){
@@ -25,6 +24,15 @@ public class Day1 {
         }
         return sum;
     }
+
+    private static int getSumOfFuelRequirementsConsideringFuelMass(List<LaunchModule> launchModules){
+        int sum = 0;
+        for (LaunchModule launchModule : launchModules){
+            sum += launchModule.calculateFuelRequirementConsideringFuelMass();
+        }
+        return sum;
+    }
+
 
     /**
      * Reads a list of mass integer values from a file and creates corresponding LaunchModules
